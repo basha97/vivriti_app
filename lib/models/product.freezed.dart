@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Product _$ProductFromJson(Map<String, dynamic> json) {
+  return _Product.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Product {
   int get id => throw _privateConstructorUsedError;
@@ -29,15 +33,11 @@ mixin _$Product {
   double get rating => throw _privateConstructorUsedError;
 
   int get stock => throw _privateConstructorUsedError;
-
   String get brand => throw _privateConstructorUsedError;
-
   String get category => throw _privateConstructorUsedError;
-
   String get thumbnail => throw _privateConstructorUsedError;
 
-  List<String> get images => throw _privateConstructorUsedError;
-
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ProductCopyWith<Product> get copyWith => throw _privateConstructorUsedError;
 }
@@ -46,7 +46,6 @@ mixin _$Product {
 abstract class $ProductCopyWith<$Res> {
   factory $ProductCopyWith(Product value, $Res Function(Product) then) =
       _$ProductCopyWithImpl<$Res, Product>;
-
   @useResult
   $Res call(
       {int id,
@@ -58,8 +57,7 @@ abstract class $ProductCopyWith<$Res> {
       int stock,
       String brand,
       String category,
-      String thumbnail,
-      List<String> images});
+      String thumbnail});
 }
 
 /// @nodoc
@@ -69,7 +67,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
 
   // ignore: unused_field
   final $Val _value;
-
   // ignore: unused_field
   final $Res Function($Val) _then;
 
@@ -86,7 +83,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
     Object? brand = null,
     Object? category = null,
     Object? thumbnail = null,
-    Object? images = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -129,10 +125,6 @@ class _$ProductCopyWithImpl<$Res, $Val extends Product>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
-      images: null == images
-          ? _value.images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ) as $Val);
   }
 }
@@ -142,7 +134,6 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
   factory _$$ProductImplCopyWith(
           _$ProductImpl value, $Res Function(_$ProductImpl) then) =
       __$$ProductImplCopyWithImpl<$Res>;
-
   @override
   @useResult
   $Res call(
@@ -155,8 +146,7 @@ abstract class _$$ProductImplCopyWith<$Res> implements $ProductCopyWith<$Res> {
       int stock,
       String brand,
       String category,
-      String thumbnail,
-      List<String> images});
+      String thumbnail});
 }
 
 /// @nodoc
@@ -180,7 +170,6 @@ class __$$ProductImplCopyWithImpl<$Res>
     Object? brand = null,
     Object? category = null,
     Object? thumbnail = null,
-    Object? images = null,
   }) {
     return _then(_$ProductImpl(
       id: null == id
@@ -223,16 +212,12 @@ class __$$ProductImplCopyWithImpl<$Res>
           ? _value.thumbnail
           : thumbnail // ignore: cast_nullable_to_non_nullable
               as String,
-      images: null == images
-          ? _value._images
-          : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
     ));
   }
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ProductImpl implements _Product {
   const _$ProductImpl(
       {required this.id,
@@ -244,9 +229,10 @@ class _$ProductImpl implements _Product {
       required this.stock,
       required this.brand,
       required this.category,
-      required this.thumbnail,
-      required final List<String> images})
-      : _images = images;
+      required this.thumbnail});
+
+  factory _$ProductImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ProductImplFromJson(json);
 
   @override
   final int id;
@@ -268,18 +254,10 @@ class _$ProductImpl implements _Product {
   final String category;
   @override
   final String thumbnail;
-  final List<String> _images;
-
-  @override
-  List<String> get images {
-    if (_images is EqualUnmodifiableListView) return _images;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_images);
-  }
 
   @override
   String toString() {
-    return 'Product(id: $id, title: $title, description: $description, price: $price, discountPercentage: $discountPercentage, rating: $rating, stock: $stock, brand: $brand, category: $category, thumbnail: $thumbnail, images: $images)';
+    return 'Product(id: $id, title: $title, description: $description, price: $price, discountPercentage: $discountPercentage, rating: $rating, stock: $stock, brand: $brand, category: $category, thumbnail: $thumbnail)';
   }
 
   @override
@@ -300,30 +278,26 @@ class _$ProductImpl implements _Product {
             (identical(other.category, category) ||
                 other.category == category) &&
             (identical(other.thumbnail, thumbnail) ||
-                other.thumbnail == thumbnail) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+                other.thumbnail == thumbnail));
   }
 
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      title,
-      description,
-      price,
-      discountPercentage,
-      rating,
-      stock,
-      brand,
-      category,
-      thumbnail,
-      const DeepCollectionEquality().hash(_images));
+  int get hashCode => Object.hash(runtimeType, id, title, description, price,
+      discountPercentage, rating, stock, brand, category, thumbnail);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
       __$$ProductImplCopyWithImpl<_$ProductImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ProductImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Product implements Product {
@@ -337,8 +311,9 @@ abstract class _Product implements Product {
       required final int stock,
       required final String brand,
       required final String category,
-      required final String thumbnail,
-      required final List<String> images}) = _$ProductImpl;
+      required final String thumbnail}) = _$ProductImpl;
+
+  factory _Product.fromJson(Map<String, dynamic> json) = _$ProductImpl.fromJson;
 
   @override
   int get id;
@@ -354,25 +329,16 @@ abstract class _Product implements Product {
 
   @override
   double get discountPercentage;
-
   @override
   double get rating;
-
   @override
   int get stock;
-
   @override
   String get brand;
-
   @override
   String get category;
-
   @override
   String get thumbnail;
-
-  @override
-  List<String> get images;
-
   @override
   @JsonKey(ignore: true)
   _$$ProductImplCopyWith<_$ProductImpl> get copyWith =>
