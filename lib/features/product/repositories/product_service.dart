@@ -23,4 +23,35 @@ class HttpProductService implements IProductRepository {
       rethrow;
     }
   }
+
+  @override
+  Future<List<String>> getCategories() async {
+    try {
+      final response = await httpService.get('products/categories');
+      final data = response.data;
+      final result = List<String>.from(
+        data.map((category) => category),
+      ).toList();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<List<Product>> getProductsByCategory(String category) async {
+    try {
+      final response = await httpService.get('products/category/$category');
+      final data = response.data;
+      final products = data['products'] as List;
+      final result = List<Product>.from(
+        products.map(
+          (product) => Product.fromJson(product as Map<String, dynamic>),
+        ),
+      ).toList();
+      return result;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
