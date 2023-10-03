@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:vivriti_app/core/resources/images/common_images.dart';
 import 'package:vivriti_app/core/resources/route_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -23,11 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: CachedNetworkImage(
-          imageUrl:
-              'https://cdn-images-1.medium.com/v2/resize:fit:184/1*OmMk5vql6JUhLctEQfYR4w@2x.png',
-          errorWidget: (context, url, error) => const Icon(Icons.error),
-        ),
+        child: Image.asset(CommonImages.splash),
       ),
     );
   }
