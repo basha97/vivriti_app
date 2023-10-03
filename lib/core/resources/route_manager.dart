@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:vivriti_app/app/splash.dart';
+import 'package:vivriti_app/features/home/view/home.dart';
 
 class Routes {
   static const String splashRoute = '/';
+  static const String homeRoute = '/home';
 }
 
 class RouteGenerator {
@@ -10,6 +12,8 @@ class RouteGenerator {
     switch (routeSettings.name) {
       case Routes.splashRoute:
         return MaterialPageRoute(builder: (_) => const SplashScreen());
+      case Routes.homeRoute:
+        return MaterialPageRoute(builder: (_) => const HomeScreen());
       default:
         return unDefinedRoute();
     }
