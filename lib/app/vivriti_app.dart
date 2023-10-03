@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vivriti_app/core/resources/route_manager.dart';
 
 class VivritiApp extends StatelessWidget {
   const VivritiApp({Key? key}) : super(key: key);
@@ -7,9 +8,10 @@ class VivritiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       title: 'Vivriti App',
-      home: FlutterLogo(),
       debugShowCheckedModeBanner: false,
       themeMode: ThemeMode.light,
+      onGenerateRoute: RouteGenerator.getRoute,
+      initialRoute: Routes.splashRoute,
     );
   }
 }
