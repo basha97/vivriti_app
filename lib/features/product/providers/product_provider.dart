@@ -30,3 +30,10 @@ final getCategoriesProvider = FutureProvider<List<String>>((ref) async {
 });
 
 final categoryProvider = StateProvider<String?>((ref) => null);
+
+final searchProvider = StateProvider<String?>((ref) => null);
+
+//TODO: update input search with provider
+//TODO: fetch data with inputSearch
+//TODO: category and search functionality
+//TODO: E-Commerce UI
