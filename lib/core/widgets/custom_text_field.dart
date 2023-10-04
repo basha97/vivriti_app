@@ -11,6 +11,7 @@ class CustomTextFormField extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final searchProviderValue = ref.watch(searchProvider);
     final textEditingController = useTextEditingController();
+
     return TextFormField(
       controller: textEditingController,
       onTapOutside: (_) => FocusScope.of(context).unfocus(),
@@ -29,7 +30,7 @@ class CustomTextFormField extends HookConsumerWidget {
             ? GestureDetector(
                 onTap: () => {
                   textEditingController.clear(),
-                  ref.refresh(searchProvider)
+                  ref.invalidate(searchProvider)
                 },
                 child: Icon(Icons.close, color: Colors.black),
               )

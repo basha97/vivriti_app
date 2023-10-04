@@ -8,9 +8,12 @@ class HttpProductService implements IProductRepository {
   final HttpService httpService;
 
   @override
-  Future<List<Product>> getProducts() async {
+  Future<List<Product>> getProducts({String? search}) async {
     try {
-      final response = await httpService.get('products');
+      final response = await httpService.get(
+        'products/search',
+        queryParameters: {'q': search ?? ''},
+      );
       final data = response.data;
       final products = data['products'] as List;
       final result = List<Product>.from(

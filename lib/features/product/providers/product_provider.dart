@@ -13,12 +13,20 @@ final productServiceProvider = Provider<IProductRepository>(
 
 final getProductsProvider = FutureProvider<List<Product>>((ref) async {
   final category = ref.watch(categoryProvider);
+  final search = ref.watch(searchProvider);
   final productService = ref.read(productServiceProvider);
   if (category != null) {
     final products = await productService.getProductsByCategory(category);
-    return products;
+    if (search != null) {
+      List<Product> filteredProducts = products.where((product) {
+        return product.title.toLowerCase().contains(search.toLowerCase());
+      }).toList();
+      return filteredProducts;
+    } else {
+      return products;
+    }
   } else {
-    final products = await productService.getProducts();
+    final products = await productService.getProducts(search: search);
     return products;
   }
 });
@@ -32,8 +40,3 @@ final getCategoriesProvider = FutureProvider<List<String>>((ref) async {
 final categoryProvider = StateProvider<String?>((ref) => null);
 
 final searchProvider = StateProvider<String?>((ref) => null);
-
-//TODO: update input search with provider
-//TODO: fetch data with inputSearch
-//TODO: category and search functionality
-//TODO: E-Commerce UI
