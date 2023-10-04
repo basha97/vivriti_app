@@ -8,35 +8,42 @@ class CustomDropDown extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final categories = ref.read(getCategoriesProvider);
+    final categories = ref.watch(getCategoriesProvider);
+    final category = ref.watch(categoryProvider);
 
     return categories.when(
       data: (data) {
         return DropdownButtonFormField2<String>(
+          value: category,
           isExpanded: true,
           decoration: InputDecoration(
+            suffixIcon: category != null
+                ? GestureDetector(
+                    onTap: () => ref.invalidate(categoryProvider),
+                    child: Icon(Icons.clear),
+                  )
+                : null,
             contentPadding: const EdgeInsets.symmetric(vertical: 16),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
             ),
           ),
           hint: Text(
-            'Select Category ${data.length}',
-            style: TextStyle(fontSize: 14),
+            'Select Category',
+            style: TextStyle(fontSize: 14, color: Colors.grey),
           ),
           items: data
               .map((item) => DropdownMenuItem<String>(
-                    value: item,
-                    child: Text(
-                      item,
-                      style: const TextStyle(
-                        fontSize: 14,
-                      ),
-                    ),
-                  ))
+            value: item,
+            child: Text(
+              item,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
+          ))
               .toList(),
           onChanged: (value) {
-            print('onChanged => $value');
             ref.read(categoryProvider.notifier).state = value;
           },
           onSaved: (value) {},

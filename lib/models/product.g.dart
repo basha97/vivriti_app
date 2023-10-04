@@ -18,6 +18,8 @@ _$ProductImpl _$$ProductImplFromJson(Map<String, dynamic> json) =>
       brand: json['brand'] as String,
       category: json['category'] as String,
       thumbnail: json['thumbnail'] as String,
+      images:
+          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
     );
 
 Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
@@ -32,4 +34,5 @@ Map<String, dynamic> _$$ProductImplToJson(_$ProductImpl instance) =>
       'brand': instance.brand,
       'category': instance.category,
       'thumbnail': instance.thumbnail,
+      'images': instance.images,
     };

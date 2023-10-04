@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:vivriti_app/features/product/view/product_item.dart';
 import 'package:vivriti_app/models/product.dart';
 
 class ProductListWidget extends StatelessWidget {
@@ -8,20 +9,19 @@ class ProductListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: ListView.builder(
-        shrinkWrap: true,
-        primary: false,
-        itemCount: products.length,
-        itemBuilder: (_, index) {
-          final product = products[index];
-          return Container(
-            height: 200,
-            margin: const EdgeInsets.symmetric(vertical: 10),
-            color: Colors.red,
-            child: Text('${product.title}'),
-          );
-        },
-      ),
+      child: products.isEmpty
+          ? const Center(child: Text('No Product Found'))
+          : GridView.builder(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                childAspectRatio: 0.85,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 15,
+              ),
+              itemCount: products.length,
+              shrinkWrap: true,
+              itemBuilder: (_, index) => ProductItem(product: products[index]),
+            ),
     );
   }
 }

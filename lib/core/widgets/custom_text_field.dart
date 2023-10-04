@@ -26,6 +26,8 @@ class CustomTextFormField extends HookConsumerWidget {
         enabledBorder: outLineInputBorder,
         border: outLineInputBorder,
         focusedBorder: outLineInputBorder,
+        hintText: 'Search Products',
+        hintStyle: TextStyle(color: Colors.grey),
         suffixIcon: searchProviderValue != null
             ? GestureDetector(
                 onTap: () => {

@@ -12,9 +12,7 @@ class ProductScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final productsProvider = ref.watch(getProductsProvider);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Products'),
-      ),
+      appBar: AppBar(title: const Text('Products')),
       body: Container(
         margin: const EdgeInsets.all(12),
         child: Column(
